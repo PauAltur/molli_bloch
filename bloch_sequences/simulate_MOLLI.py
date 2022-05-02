@@ -58,7 +58,7 @@ def simulate_MOLLI(T_i = np.array((150.0, 200.0, 1150.0, 1200.0, 2150.0, 2200.0,
 
     '''
  
-    T_rec = T_chr_to_T_i(T_i)
+    T_rec = T_i_to_T_chr(T_i)
     
     M_raw = np.empty((3, T_rec.shape[0] + 3))
     

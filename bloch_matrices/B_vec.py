@@ -6,10 +6,10 @@ Created on Tue Apr  5 18:19:20 2022
 """
 
 import numpy as np
-from molli_bloch.bloch_sequences.bloch_matrices.R_alfa import R_alfa
-from molli_bloch.bloch_sequences.bloch_matrices.P_t import P_t
-from molli_bloch.bloch_sequences.bloch_matrices.C_t import C_t
-from molli_bloch.bloch_sequences.bloch_matrices.D_t import D_t
+from molli_bloch.bloch_matrices.R_alfa import R_alfa
+from molli_bloch.bloch_matrices.P_t import P_t
+from molli_bloch.bloch_matrices.C_t import C_t
+from molli_bloch.bloch_matrices.D_t import D_t
 
 def B_vec(T1, T2, B1, TE, TR, alfa):
     '''

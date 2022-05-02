@@ -30,7 +30,7 @@ def T_i_from_hr(hr):
     period_ms = 1 / hr_ms   # calculate period
     
     T_chr = np.empty((11,))
-    T_chr[0] = 0.1 * period_ms   # first acquisition
+    T_chr[0] = 0.15 * period_ms   # first acquisition
     
     for i in range(5):
         T_chr[i + 1] = T_chr[i] + period_ms # 2nd to 5th acquistions
@@ -40,7 +40,7 @@ def T_i_from_hr(hr):
     frac_rest = T_chr[6] / period_ms   # heartbeat fraction after 3000 ms rest
     frac_next = math.ceil(frac_rest)   # find heartbeat fraction of next same moment in heartbeat
     
-    T_chr[7] = frac_next * period_ms - 200  # calculate inversion time for 2nd IR experiment
+    T_chr[7] = frac_next * period_ms - 0.2 * period_ms  # calculate inversion time for 2nd IR experiment
     T_chr[8] = frac_next * period_ms   # find time of next same moment in heartbeat
     
     for i in range(2):
