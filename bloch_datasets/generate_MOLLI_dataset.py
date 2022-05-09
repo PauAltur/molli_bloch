@@ -62,8 +62,8 @@ def generate_MOLLI_dataset(n_samples, T1_range, T2_range, B1_range, t_arrays, co
     T2_min, T2_max = T2_range
     B1_min, B1_max = B1_range
     
-    T1_rand_array = np.random.randint(T1_min, T1_max, size = n_samples)
-    T2_rand_array = np.random.randint(T2_min, T2_max, size = n_samples)
+    T1_rand_array = (T1_max - T1_min) * np.random.random_sample((n_samples,)) + T1_min
+    T2_rand_array = (T2_max - T2_min) * np.random.random_sample((n_samples,)) + T2_min
     B1_rand_array = (B1_max - B1_min) * np.random.random_sample((n_samples,)) + B1_min
     
     mollis = np.empty((n_samples, 2, t_arrays.shape[1]))
