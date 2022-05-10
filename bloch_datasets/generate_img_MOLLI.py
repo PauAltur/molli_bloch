@@ -11,22 +11,24 @@ from molli_bloch.bloch_inference import infer_B1_map
 
 
 
-def generate_img_MOLLI_dataset(t_array, T1_map, B1_range = (0.99, 1.01)):
+def generate_img_MOLLI(t_array, T1_map, mask, B1_range = (0.99, 1.01)):
     
     m, n = T1_map.shape
     
-    T2_map = infer_T2_map(T1_map)
+    T2_map = infer_T2_map(mask, T1_map)
     B1_map = infer_B1_map(T1_map, B1_range[0], B1_range[1])
     
     simulated_MOLLI = np.empty((len(t_array), m, n))
     
     for i in range(m):
         for j in range(n):
+            if mask[i, j] == True:
             
-            T1 = T1_map[i, j]
-            T2 = T2_map[i, j]
-            B1 = T2_map[i, j]
-            
-            simulated_MOLLI[:, i, j] = simulate_MOLLI(t_array, T1, T2, B1)
+                T1 = T1_map[i, j]
+                T2 = T2_map[i, j]
+                B1 = B1_map[i, j]
+                
+                M_ord_abs, M_ord, M_raw = simulate_MOLLI(t_array, T1, T2, B1)
+                simulated_MOLLI[:, i, j] = M_ord_abs[1, :]
             
     return simulated_MOLLI, T2_map, B1_map

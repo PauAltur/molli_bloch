@@ -6,6 +6,7 @@ Created on Wed May  4 18:39:55 2022
 """
 
 import numpy as np
+import random as rand
 
 def infer_B1_map(T1_map, B1_min, B1_max):
     
@@ -19,10 +20,8 @@ def infer_B1_map(T1_map, B1_min, B1_max):
     xv = np.abs(xv - np.round(m/2))
     yv = np.abs(yv - np.round(n/2))
     
-    circle_map = (xv**2 + yv**2) / np.random.randint(0, np.round(m/2)) ** 2
-    
-    B1_map_over = ((circle_map - 1) * (circle_map > 1))
-    
-    ## Scale the gradient of B1 over and under the unit circle
-    
+    radius = rand.uniform(m / 4, m / 2)
+     
+    B1_map = (xv**2 + yv**2) / radius ** 2
+
     return B1_map
