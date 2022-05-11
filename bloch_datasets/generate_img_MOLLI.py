@@ -18,7 +18,7 @@ def generate_img_MOLLI(t_array, T1_map, mask, B1_min, B1_radius):
     T2_map = infer_T2_map(mask, T1_map)
     B1_map = infer_B1_map(T1_map, B1_min, B1_radius)
     
-    simulated_MOLLI = np.empty((len(t_array), m, n))
+    simulated_MOLLI = np.empty((m, n, len(t_array)))
     
     for i in range(m):
         for j in range(n):
@@ -29,6 +29,6 @@ def generate_img_MOLLI(t_array, T1_map, mask, B1_min, B1_radius):
                 B1 = B1_map[i, j]
                 
                 M_ord_abs, M_ord, M_raw = simulate_MOLLI(t_array, T1, T2, B1)
-                simulated_MOLLI[:, i, j] = M_ord_abs[1, :]
+                simulated_MOLLI[i, j, :] = M_ord_abs[1, :]
             
     return simulated_MOLLI, T2_map, B1_map
