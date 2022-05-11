@@ -6,9 +6,8 @@ Created on Wed May  4 18:39:55 2022
 """
 
 import numpy as np
-import random as rand
 
-def infer_B1_map(T1_map, B1_min, B1_max):
+def infer_B1_map(T1_map, B1_min, radius):
     
     m, n = T1_map.shape
     
@@ -20,8 +19,10 @@ def infer_B1_map(T1_map, B1_min, B1_max):
     xv = np.abs(xv - np.round(m/2))
     yv = np.abs(yv - np.round(n/2))
     
-    radius = rand.uniform(m / 4, m / 2)
-     
-    B1_map = (xv**2 + yv**2) / radius ** 2
+    distance_map = np.sqrt(xv**2 + yv**2)
+    distance_map_norm = distance_map / distance_map.max()
+
+    B1_max = (((1 - B1_min) * distance_map.max()) / radius) + B1_min
+    B1_map = (B1_max - B1_min) * distance_map_norm + B1_min
 
     return B1_map
